@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
+import org.ppollack.crudandsearch.exceptions.CrudException;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;
@@ -51,7 +52,11 @@ public class PatientDaoTest {
   }
 
   private void deleteAndAssert(PatientCrudDao patientCrudDao, IPerson patient) {
-    dao.delete(patient);
+    try {
+      dao.delete(patient);
+    } catch (CrudException e) {
+      throw new RuntimeException(e);
+    }
     patient = dao.get(patientCrudDao, patient.getId());
     assertNull(patient);
   }
@@ -70,7 +75,11 @@ public class PatientDaoTest {
 
     }
 
-    dao.upsert(patient);
+    try {
+      dao.upsert(patient);
+    } catch (CrudException e) {
+      throw new RuntimeException(e);
+    }
 
     IPerson persistedPatient = dao.get(patientCrudDao, patient.getId());
     assertPersistedPatient(patient, persistedPatient);

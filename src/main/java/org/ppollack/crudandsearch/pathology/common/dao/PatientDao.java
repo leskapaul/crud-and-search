@@ -1,19 +1,21 @@
 package org.ppollack.crudandsearch.pathology.common.dao;
 
-import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
+import org.ppollack.crudandsearch.dao.ICrudAndSearchDao;
+import org.ppollack.crudandsearch.exceptions.CrudException;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
+import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
 
 import java.util.List;
 
-public class PatientDao {
+public class PatientDao implements ICrudAndSearchDao<IPerson, PatientCrudDao> {
 
   private PatientElasticsearchDao searchEngineDao = new PatientElasticsearchDao();
 
   public IPerson get(PatientCrudDao crudDao, Object id) {
-    return crudDao.getDao().getById(id);
+    return (IPerson) crudDao.getDao().getById(id);
   }
 
-  public void upsert(IPerson patient) {
+  public void upsert(IPerson patient) throws CrudException {
     PatientCrudDao crudDao = PatientCrudDao.valueOf(patient.getDatasourceName());
 
     // upsert the data in its data store
@@ -23,7 +25,7 @@ public class PatientDao {
     searchEngineDao.upsert(patient);
   }
 
-  public void delete(IPerson patient) {
+  public void delete(IPerson patient) throws CrudException {
     PatientCrudDao crudDao = PatientCrudDao.valueOf(patient.getDatasourceName());
     crudDao.getDao().delete(patient);
   }
