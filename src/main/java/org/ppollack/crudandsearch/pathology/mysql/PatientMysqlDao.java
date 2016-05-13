@@ -1,6 +1,6 @@
 package org.ppollack.crudandsearch.pathology.mysql;
 
-import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
+import org.ppollack.crudandsearch.dao.IPersonDao;
 import org.ppollack.crudandsearch.IdTypeResolver;
 
 import java.util.HashMap;

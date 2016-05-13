@@ -1,4 +1,4 @@
-package org.ppollack.crudandsearch;
+package org.ppollack.crudandsearch.dao;
 
 import java.util.List;
 
