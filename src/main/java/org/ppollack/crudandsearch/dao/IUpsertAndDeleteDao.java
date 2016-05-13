@@ -1,6 +1,6 @@
 package org.ppollack.crudandsearch.dao;
 
-import org.ppollack.crudandsearch.exceptions.CrudException;
+import org.ppollack.crudandsearch.exception.CrudException;
 
 public interface IUpsertAndDeleteDao<T> {
 

@@ -1,4 +1,4 @@
-package org.ppollack.crudandsearch.exceptions;
+package org.ppollack.crudandsearch.exception;
 
 import java.util.HashMap;
 import java.util.Map;

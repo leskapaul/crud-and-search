@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
-import org.ppollack.crudandsearch.exceptions.CrudException;
+import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;

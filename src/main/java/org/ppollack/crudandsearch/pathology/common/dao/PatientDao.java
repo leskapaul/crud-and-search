@@ -1,7 +1,7 @@
 package org.ppollack.crudandsearch.pathology.common.dao;
 
 import org.ppollack.crudandsearch.dao.ICrudAndSearchDao;
-import org.ppollack.crudandsearch.exceptions.CrudException;
+import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
 
