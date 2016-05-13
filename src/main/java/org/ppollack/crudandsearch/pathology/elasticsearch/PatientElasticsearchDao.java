@@ -1,6 +1,6 @@
 package org.ppollack.crudandsearch.pathology.elasticsearch;
 
-import org.ppollack.crudandsearch.dao.IPersonDao;
+import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
 import org.ppollack.crudandsearch.dao.ISearchDao;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 
@@ -9,14 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PatientElasticsearchDao implements IPersonDao<IPerson>, ISearchDao<IPerson> {
+public class PatientElasticsearchDao implements IPersonDao<IPerson, String>, ISearchDao<IPerson> {
 
   private Map<String, IPerson> data = new HashMap<>();
 
   @Override
-  public IPerson getById(Object id) {
-    String typedId = String.valueOf(id); // for elasticsearch, stringify id for simplicity
-    return data.get(typedId);
+  public IPerson getById(String id) {
+    return data.get(id);
   }
 
   @Override
@@ -32,7 +31,7 @@ public class PatientElasticsearchDao implements IPersonDao<IPerson>, ISearchDao<
 
   @Override
   public List<IPerson> search(String query) {
-    // TODO this is a mock implementation
+
     List<IPerson> results = new ArrayList<>();
     for (IPerson patient : data.values()) {
       if (safeStringContains(patient.getFirstName(), query)) {

@@ -1,27 +1,21 @@
 package org.ppollack.crudandsearch.pathology.mysql;
 
-import org.ppollack.crudandsearch.dao.IPersonDao;
-import org.ppollack.crudandsearch.IdTypeResolver;
+import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PatientMysqlDao implements IPersonDao<PatientMysql> {
-
-  private static final Class<Long> ID_TYPE = Long.class;
+public class PatientMysqlDao implements IPersonDao<PatientMysql, Long> {
 
   private Map<Long, PatientMysql> data = new HashMap<>();
 
   @Override
-  public PatientMysql getById(Object id) {
-    Long typedId = IdTypeResolver.typifyId(ID_TYPE, id);
-    // TODO
-    return data.get(typedId);
+  public PatientMysql getById(Long id) {
+    return data.get(id);
   }
 
   @Override
   public void upsert(PatientMysql person) {
-    // TODO
     data.put(person.getId(), person);
   }
 

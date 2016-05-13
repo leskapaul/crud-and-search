@@ -1,6 +1,5 @@
 package org.ppollack.crudandsearch.pathology.common.dao;
 
-import org.ppollack.crudandsearch.dao.IPersonDao;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodbDao;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysqlDao;
 

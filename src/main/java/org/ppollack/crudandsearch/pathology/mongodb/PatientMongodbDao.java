@@ -1,22 +1,17 @@
 package org.ppollack.crudandsearch.pathology.mongodb;
 
-import org.ppollack.crudandsearch.dao.IPersonDao;
-import org.ppollack.crudandsearch.IdTypeResolver;
+import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PatientMongodbDao implements IPersonDao<PatientMongodb> {
-
-  private static final Class<String> ID_TYPE = String.class;
+public class PatientMongodbDao implements IPersonDao<PatientMongodb, String> {
 
   private Map<String, PatientMongodb> data = new HashMap<>();
 
   @Override
-  public PatientMongodb getById(Object id) {
-    String typedId = IdTypeResolver.typifyId(ID_TYPE, id);
-    // TODO
-    return data.get(typedId);
+  public PatientMongodb getById(String id) {
+    return data.get(id);
   }
 
   @Override
