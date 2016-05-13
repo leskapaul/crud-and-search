@@ -1,7 +1,7 @@
-package org.ppollack.crudandsearch;
+package org.ppollack.crudandsearch.pathology.common.dao;
 
-import org.ppollack.pathology.elasticsearch.PatientElasticsearchDao;
-import org.ppollack.pathology.model.IPerson;
+import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
+import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 
 import java.util.List;
 

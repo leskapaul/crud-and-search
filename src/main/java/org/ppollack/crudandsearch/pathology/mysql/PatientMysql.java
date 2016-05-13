@@ -1,9 +1,9 @@
-package org.ppollack.pathology.mysql;
+package org.ppollack.crudandsearch.pathology.mysql;
 
-import org.ppollack.crudandsearch.PatientCrudDao;
-import org.ppollack.pathology.model.IMailingAddress;
-import org.ppollack.pathology.model.IPerson;
-import org.ppollack.pathology.model.IPhoneNumber;
+import org.ppollack.crudandsearch.pathology.common.dao.PatientCrudDao;
+import org.ppollack.crudandsearch.pathology.common.model.IMailingAddress;
+import org.ppollack.crudandsearch.pathology.common.model.IPerson;
+import org.ppollack.crudandsearch.pathology.common.model.IPhoneNumber;
 
 import java.util.List;
 

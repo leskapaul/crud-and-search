@@ -1,4 +1,4 @@
-package org.ppollack.pathology.model;
+package org.ppollack.crudandsearch.pathology.common.model;
 
 public interface IPhoneNumber {
 

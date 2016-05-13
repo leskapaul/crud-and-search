@@ -1,13 +1,13 @@
+package org.ppollack.crudandsearch.pathology.common.dao;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
-import org.ppollack.crudandsearch.PatientCrudDao;
-import org.ppollack.crudandsearch.PatientDao;
-import org.ppollack.pathology.model.IPerson;
-import org.ppollack.pathology.mongodb.PatientMongodb;
-import org.ppollack.pathology.mysql.PatientMysql;
+import org.ppollack.crudandsearch.pathology.common.model.IPerson;
+import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
+import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;
 
 import java.util.List;
 
