@@ -1,13 +1,10 @@
 package org.ppollack.crudandsearch.pathology.common.model;
 
+import org.ppollack.crudandsearch.model.IAddressableEntity;
+
 import java.util.List;
 
-public interface IPerson<T> {
-
-  String getDatasourceName();
-
-  void setId(T id);
-  T getId();
+public interface IPerson<T> extends IAddressableEntity<T> {
 
   String getFirstName();
   String getMiddleName();

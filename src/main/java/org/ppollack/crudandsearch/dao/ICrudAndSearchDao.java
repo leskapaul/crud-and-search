@@ -1,6 +1,8 @@
 package org.ppollack.crudandsearch.dao;
 
-public interface ICrudAndSearchDao<T, E> extends IUpsertAndDeleteDao<T>, ISearchDao<T> {
+import org.ppollack.crudandsearch.model.IAddressableEntity;
 
-  T get(E crudDaoEnum, Object id);
+public interface ICrudAndSearchDao<T extends IAddressableEntity> extends IUpsertAndDeleteDao<T>, ISearchDao<T> {
+
+  T get(String datasourceName, Object id);
 }

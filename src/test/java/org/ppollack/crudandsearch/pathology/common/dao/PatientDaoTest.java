@@ -57,7 +57,7 @@ public class PatientDaoTest {
     } catch (CrudException e) {
       throw new RuntimeException(e);
     }
-    patient = dao.get(patientCrudDao, patient.getId());
+    patient = dao.get(patientCrudDao.name(), patient.getId());
     assertNull(patient);
   }
 
@@ -81,7 +81,7 @@ public class PatientDaoTest {
       throw new RuntimeException(e);
     }
 
-    IPerson persistedPatient = dao.get(patientCrudDao, patient.getId());
+    IPerson persistedPatient = dao.get(patientCrudDao.name(), patient.getId());
     assertPersistedPatient(patient, persistedPatient);
     return patient;
   }

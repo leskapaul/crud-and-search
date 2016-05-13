@@ -1,7 +1,7 @@
 package org.ppollack.crudandsearch.pathology.elasticsearch;
 
+import org.ppollack.crudandsearch.dao.IUpsertAndSearchDao;
 import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
-import org.ppollack.crudandsearch.dao.ISearchDao;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 
 import java.util.ArrayList;
@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PatientElasticsearchDao implements IPersonDao<IPerson, String>, ISearchDao<IPerson> {
+public class PatientElasticsearchDao implements IPersonDao<IPerson, String>,
+    IUpsertAndSearchDao<IPerson> {
 
   private Map<String, IPerson> data = new HashMap<>();
 
