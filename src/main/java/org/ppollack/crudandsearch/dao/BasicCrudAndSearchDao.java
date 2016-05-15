@@ -3,6 +3,7 @@ package org.ppollack.crudandsearch.dao;
 import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.model.IAddressableEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class BasicCrudAndSearchDao<T extends IAddressableEntity> implements ICrudAndSearchDao<T> {
@@ -17,7 +18,7 @@ public class BasicCrudAndSearchDao<T extends IAddressableEntity> implements ICru
   }
 
   @Override
-  public T get(String datasourceName, Object id) {
+  public T get(String datasourceName, Serializable id) {
     return (T) crudDaoResolver.resolveDao(datasourceName).getById(id);
   }
 

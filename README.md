@@ -8,11 +8,12 @@ data storage technology; generally just CRUD-by-ID and get-all capabilities.
 This library is intended to offer an API to such implementations.
 This API shall include an interface to search functionality, backed by search engine technology
 (e.g. Elasticsearch).  Writes via the API around CRUD-by-ID functionality shall propagate
-updates to the search engine index.
+updates to the search engine index.  See PatientDao.java for an example.
 
-This project uses Docker to demonstrate capabilities.  For example, by running one of the Docker
-Compose files at the root of this project a number of Docker containers will be run.  These
-containers include multiple, disparate data storage technologies, a search engine, and a
-container running the crud-and-search library with a REST interface.
+Coming soon...
+This project utilizes Docker to facilitate search via Elasticsearch.  Docker is also used to
+demonstrate capabilities by running several disparate data stores for example purposes.
+Docker Compose file "compose-mysql-mongodb.yml" is an example.  This Docker Compose
+will run four containers: mySQL, MongoDB, Elasticearch, and crud-and-search.
 
 NOTE: This project is currently in development and not yet fully functional.

@@ -1,7 +1,9 @@
 package org.ppollack.crudandsearch.dao;
 
-public interface ICrudDao<T, K> extends IUpsertAndDeleteDao<T> {
+import java.io.Serializable;
 
-  public T getById(K id);
+public interface ICrudDao<T, ID extends Serializable> extends IUpsertAndDeleteDao<T> {
+
+  public T getById(ID id);
 
 }

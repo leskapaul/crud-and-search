@@ -1,10 +1,12 @@
 package org.ppollack.crudandsearch.model;
 
-public interface IAddressableEntity<T> {
+import java.io.Serializable;
+
+public interface IAddressableEntity<ID extends Serializable> {
 
   String getDatasourceName();
 
-  void setId(T id);
-  T getId();
+  void setId(ID id);
+  ID getId();
 
 }
