@@ -10,10 +10,6 @@ This API shall include an interface to search functionality, backed by search en
 (e.g. Elasticsearch).  Writes via the API around CRUD-by-ID functionality shall propagate
 updates to the search engine index.  See PatientDao.java for an example.
 
-Coming soon...
-This project utilizes Docker to facilitate search via Elasticsearch.  Docker is also used to
+This project utilizes Docker to facilitate search via Elasticsearch.  Docker may also be used to
 demonstrate capabilities by running several disparate data stores for example purposes.
-Docker Compose file "compose-mysql-mongodb.yml" is an example.  This Docker Compose
-will run four containers: mySQL, MongoDB, Elasticearch, and crud-and-search.
-
-NOTE: This project is currently in development and not yet fully functional.
+See the Docker Compose files located in this project's root directory for more information.

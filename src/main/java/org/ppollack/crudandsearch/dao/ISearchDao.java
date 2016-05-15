@@ -1,8 +1,8 @@
 package org.ppollack.crudandsearch.dao;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface ISearchDao<T> {
 
-  public List<T> search(String query);
+  public Page<? extends T> search(String query);
 }

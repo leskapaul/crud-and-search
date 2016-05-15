@@ -6,15 +6,15 @@ version: '2'
 # example usage: docker-compose -f compose-mysql.yml up
 
 services:
-  persist-and-search-mysql:
+  crud-and-search-mysql:
     image: mysql
-    container_name: persist-and-search-mysql
+    container_name: crud-and-search-mysql
     ports:
       - '3306:3306'
     networks:
       localbridge:
         aliases:
-          - persist-and-search
+          - crud-and-search
     environment:
       MYSQL_ROOT_PASSWORD: agillaire
 

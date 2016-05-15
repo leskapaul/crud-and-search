@@ -1,0 +1,22 @@
+version: '2'
+
+# prerequisites
+# -
+
+# example usage: docker-compose -f compose-elasticsearch.yml up
+
+services:
+  crud-and-search-elasticsearch:
+      image: elasticsearch
+      container_name: crud-and-search-elasticsearch
+      ports:
+        - '9200:9200'
+        - '9300:9300'
+      networks:
+        localbridge:
+          aliases:
+            - crud-and-search
+
+networks:
+  localbridge:
+    driver: bridge

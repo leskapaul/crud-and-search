@@ -2,6 +2,7 @@ package org.ppollack.crudandsearch.dao;
 
 import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.model.IAddressableEntity;
+import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 import java.util.List;
@@ -37,7 +38,7 @@ public class BasicCrudAndSearchDao<T extends IAddressableEntity> implements ICru
   }
 
   @Override
-  public List<T> search(String query) {
+  public Page<? extends T> search(String query) {
     return upsertAndSearchDao.search(query);
   }
 }

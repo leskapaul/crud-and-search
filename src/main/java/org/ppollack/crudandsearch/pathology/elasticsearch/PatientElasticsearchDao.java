@@ -1,59 +1,69 @@
 package org.ppollack.crudandsearch.pathology.elasticsearch;
 
+import org.elasticsearch.index.query.QueryBuilders;
 import org.ppollack.crudandsearch.dao.IUpsertAndSearchDao;
+import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.logging.Logger;
 
+// example "get all": curl -XGET 'http://localhost:9200/patient-index/_search?pretty' -d'{ "query": { "match_all": {}} }'
+@Component
 public class PatientElasticsearchDao implements IPersonDao<IPerson, String>,
     IUpsertAndSearchDao<IPerson> {
 
-  private Map<String, IPerson> data = new HashMap<>();
+  private static final Logger LOG = Logger.getLogger(PatientElasticsearchDao.class.getName());
+
+  @Autowired PatientSearchRepository patientSearchRepository;
+  @Autowired ElasticsearchTemplate elasticsearchTemplate;
 
   @Override
-  public IPerson getById(String id) {
-    return data.get(id);
+  public PatientElasticsearch getById(String s) {
+    return patientSearchRepository.findOne(s);
   }
 
   @Override
-  public void upsert(IPerson person) {
-    String typedId = String.valueOf(person.getId());
-    data.put(typedId, person);
+  public Page<? extends IPerson> search(String query) {
+    SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        .withQuery(QueryBuilders.multiMatchQuery(query, "firstName", "middleName", "lastName"))
+        .build();
+    Page<PatientElasticsearch> page =
+        elasticsearchTemplate.queryForPage(searchQuery, PatientElasticsearch.class);
+    return page;
   }
 
   @Override
-  public void delete(IPerson person) {
-    data.remove(String.valueOf(person.getId()));
+  public void upsert(IPerson person) throws CrudException {
+    PatientElasticsearch esPerson = toElasticsearchPerson(person);
+    patientSearchRepository.save(esPerson);
   }
 
   @Override
-  public List<IPerson> search(String query) {
-
-    List<IPerson> results = new ArrayList<>();
-    for (IPerson patient : data.values()) {
-      if (safeStringContains(patient.getFirstName(), query)) {
-        results.add(patient);
-      } else if (safeStringContains(patient.getLastName(), query)) {
-        results.add(patient);
-      }
-    }
-    return results;
+  public void delete(IPerson person) throws CrudException {
+    patientSearchRepository.delete(extractElasticsearchId(person));
   }
 
-  private boolean safeStringContains(String string, String query) {
-    if (string == null || query == null) return false;
+  private String extractElasticsearchId(IPerson person) {
+    return person.getDatasourceName() + ':' + person.getId();
+  }
 
-    string = string.toLowerCase();
-    query = query.toLowerCase();
-
-    String[] tokens = query.split("\\s");
-    for (String token : tokens) {
-      if (string.contains(token.trim())) return true;
-    }
-    return false;
+  // convert to concrete type to facilitate json serialization
+  private PatientElasticsearch toElasticsearchPerson(IPerson person) {
+    PatientElasticsearch esPerson = new PatientElasticsearch();
+    esPerson.setDatasourceName(person.getDatasourceName());
+    esPerson.setId(extractElasticsearchId(person));
+    esPerson.setFirstName(person.getFirstName());
+    esPerson.setMiddleName(person.getMiddleName());
+    esPerson.setLastName(person.getLastName());
+    esPerson.setMailingAddresses(person.getMailingAddresses());
+    esPerson.setPhoneNumbers(person.getPhoneNumbers());
+    return esPerson;
   }
 }

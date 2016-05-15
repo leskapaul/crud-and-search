@@ -7,14 +7,19 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import org.ppollack.crudandsearch.exception.CrudException;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
+import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public class PatientDaoTest {
 
-  private PatientDao dao = new PatientDao();
+  private PatientDao dao = new PatientDao(buildSearchDao());
+
+  private PatientElasticsearchDao buildSearchDao() {
+    // TODO need to fix this now that mock impl was replaced by real impl
+    return null;
+  }
 
   @Test
   public void upsertMysqlThenSearchByLastName() {
@@ -31,9 +36,9 @@ public class PatientDaoTest {
     IPerson mysqlPatient = upsertAndAssert(PatientCrudDao.PATIENT_MYSQL);
     IPerson mongodbPatient = upsertAndAssert(PatientCrudDao.PATIENT_MONGODB);
 
-    List<IPerson> searchResults = dao.search("medhat paul");
+    Page<? extends IPerson> searchResults = dao.search("medhat paul");
     assertNotNull(searchResults);
-    assertEquals(2, searchResults.size());
+    assertEquals(2, searchResults.getTotalElements());
 
     deleteAndAssert(PatientCrudDao.PATIENT_MYSQL, mysqlPatient);
     deleteAndAssert(PatientCrudDao.PATIENT_MONGODB, mongodbPatient);
@@ -42,10 +47,10 @@ public class PatientDaoTest {
   private void upsertAndThenSearchByLastName(PatientCrudDao patientCrudDao, String searchQuery) {
     IPerson patient = upsertAndAssert(patientCrudDao);
 
-    List<IPerson> searchResults = dao.search(searchQuery);
+    Page<? extends IPerson> searchResults = dao.search(searchQuery);
     assertNotNull(searchResults);
-    assertEquals(1, searchResults.size());
-    IPerson persistedPatient = searchResults.get(0);
+    assertEquals(1, searchResults.getTotalElements());
+    IPerson persistedPatient = searchResults.iterator().next();
     assertPersistedPatient(patient, persistedPatient);
 
     deleteAndAssert(patientCrudDao, persistedPatient);
@@ -97,8 +102,8 @@ public class PatientDaoTest {
   private IPerson buildTestMysqlPatient() {
     PatientMysql patient = new PatientMysql();
     patient.setId(1L);
-    patient.setFname("Medhat");
-    patient.setLname("Saleh");
+    patient.setFirstName("Medhat");
+    patient.setLastName("Saleh");
     return patient;
   }
 

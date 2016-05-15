@@ -6,36 +6,36 @@ version: '2'
 # example usage: docker-compose -f compose-mysql-mongodb.yml up
 
 services:
-  persist-and-search-app:
-    build: persist-and-search-app
-    container_name: persist-and-search-app
+  crud-and-search-app:
+    build: crud-and-search-app
+    container_name: crud-and-search-app
     networks:
       localbridge:
         aliases:
-          - persist-and-search
+          - crud-and-search
 
-  persist-and-search-mysql:
+  crud-and-search-mysql:
     image: mysql
-    container_name: persist-and-search-mysql
+    container_name: crud-and-search-mysql
     ports:
       - '3306:3306'
     networks:
       localbridge:
         aliases:
-          - persist-and-search
+          - crud-and-search
     environment:
       MYSQL_ROOT_PASSWORD: agillaire
 
-  persist-and-search-elasticsearch:
+  crud-and-search-elasticsearch:
       image: elasticsearch
-      container_name: persist-and-search-elasticsearch
+      container_name: crud-and-search-elasticsearch
       ports:
         - '9200:9200'
         - '9300:9300'
       networks:
         localbridge:
           aliases:
-            - persist-and-search
+            - crud-and-search
 
 networks:
   localbridge:

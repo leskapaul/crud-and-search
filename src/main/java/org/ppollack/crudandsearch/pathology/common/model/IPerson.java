@@ -11,8 +11,8 @@ public interface IPerson<T extends Serializable> extends IAddressableEntity<T> {
   String getMiddleName();
   String getLastName();
 
-  List<IMailingAddress> getMailingAddresses();
+  List<? extends IMailingAddress> getMailingAddresses();
 
-  List<IPhoneNumber> getPhoneNumbers();
+  List<? extends IPhoneNumber> getPhoneNumbers();
 
 }
