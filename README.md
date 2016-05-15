@@ -12,3 +12,5 @@ See PatientDao.java for an example.
 This project utilizes Docker to facilitate search via Elasticsearch.  Docker may also be used to
 demonstrate capabilities by running several disparate data stores for example purposes.
 See the Docker Compose files located in this project's root directory for more information.
+
+Please see SampleApplication.java for an executable example.
