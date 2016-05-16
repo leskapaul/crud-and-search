@@ -7,16 +7,19 @@ version: '2'
 
 services:
   crud-and-search-mysql:
-    image: mysql
-    container_name: crud-and-search-mysql
-    ports:
-      - '3306:3306'
-    networks:
-      localbridge:
-        aliases:
-          - crud-and-search
-    environment:
-      MYSQL_ROOT_PASSWORD: agillaire
+      image: mysql
+      container_name: crud-and-search-mysql
+      ports:
+        - '3306:3306'
+      volumes:
+        - ./data/mysql/db:/var/lib/mysql
+      networks:
+        localbridge:
+          aliases:
+            - crud-and-search
+      environment:
+        MYSQL_ROOT_PASSWORD: agillaire
+        MYSQL_DATABASE: agillaire
 
 networks:
   localbridge:
