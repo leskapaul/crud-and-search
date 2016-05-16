@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * This sample application depends on Elasticsearch running on localhost.  Use Docker Compose file
- * compose-elasticsearch.yml, in this project, to run Elasticsearch locally.  For more information
+ * compose-es-mysql.yml, in this project, to run Elasticsearch locally.  For more information
  * about Docker, please visit https://www.docker.com/.
  */
 public class SampleApplication {
