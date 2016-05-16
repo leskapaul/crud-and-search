@@ -7,7 +7,9 @@ import org.ppollack.crudandsearch.pathology.common.model.MailingAddress;
 import org.ppollack.crudandsearch.pathology.common.model.MailingAddressType;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;
+import org.ppollack.crudandsearch.pathology.mysql.PatientMysqlRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
@@ -24,9 +26,7 @@ public class SampleApplication {
 
   public static void main(String[] args) throws CrudException {
 
-    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-    context.scan("org.ppollack.crudandsearch");
-    context.refresh();
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-appcontext.xml");
 
     PatientDao patientDao = context.getBean(PatientDao.class);
     ApplicationConfiguration appConfig = context.getBean(ApplicationConfiguration.class);

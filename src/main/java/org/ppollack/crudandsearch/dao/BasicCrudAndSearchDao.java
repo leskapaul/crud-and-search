@@ -7,32 +7,30 @@ import org.springframework.data.domain.Page;
 import java.io.Serializable;
 import java.util.List;
 
-public class BasicCrudAndSearchDao<T extends IAddressableEntity> implements ICrudAndSearchDao<T> {
+public abstract class BasicCrudAndSearchDao<T extends IAddressableEntity>
+    implements ICrudAndSearchDao<T>, ICrudDaoResolver {
 
-  private ICrudDaoResolver crudDaoResolver;
   private IUpsertAndSearchDao<T> upsertAndSearchDao;
 
-  public BasicCrudAndSearchDao(ICrudDaoResolver crudDaoResolver,
-      IUpsertAndSearchDao<T> upsertAndSearchDao) {
-    this.crudDaoResolver = crudDaoResolver;
+  public BasicCrudAndSearchDao(IUpsertAndSearchDao<T> upsertAndSearchDao) {
     this.upsertAndSearchDao = upsertAndSearchDao;
   }
 
   @Override
   public T get(String datasourceName, Serializable id) {
-    return (T) crudDaoResolver.resolveDao(datasourceName).getById(id);
+    return (T) resolveDao(datasourceName).getById(id);
   }
 
   @Override
   public void upsert(T entity) throws CrudException {
-    ICrudDao<T, ?> crudDao = crudDaoResolver.resolveDao(entity.getDatasourceName());
+    ICrudDao<T, ?> crudDao = resolveDao(entity.getDatasourceName());
     crudDao.upsert(entity);
     upsertAndSearchDao.upsert(entity);
   }
 
   @Override
   public void delete(T entity) throws CrudException {
-    ICrudDao<T, ?> crudDao = crudDaoResolver.resolveDao(entity.getDatasourceName());
+    ICrudDao<T, ?> crudDao = resolveDao(entity.getDatasourceName());
     crudDao.delete(entity);
     upsertAndSearchDao.upsert(entity);
   }

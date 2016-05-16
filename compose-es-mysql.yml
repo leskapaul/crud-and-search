@@ -3,7 +3,7 @@ version: '2'
 # prerequisites
 # - ./data/mysql/db initialized by running compose-mysql.yml and then ./data/ddl/sample-ddl.sql into it
 
-# example usage: docker-compose -f compose-mysql-mongodb.yml up
+# example usage: docker-compose -f compose-es-mysql.yml up
 
 services:
 

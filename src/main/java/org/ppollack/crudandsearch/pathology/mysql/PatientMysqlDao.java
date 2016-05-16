@@ -1,27 +1,27 @@
 package org.ppollack.crudandsearch.pathology.mysql;
 
 import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@Component
 public class PatientMysqlDao implements IPersonDao<PatientMysql, Long> {
 
-  private Map<Long, PatientMysql> data = new HashMap<>();
+  @Autowired private PatientMysqlRepository patientMysqlRepository;
 
   @Override
   public PatientMysql getById(Long id) {
-    return data.get(id);
+    return patientMysqlRepository.findOne(id);
   }
 
   @Override
   public void upsert(PatientMysql person) {
-    data.put(person.getId(), person);
+    patientMysqlRepository.save(person);
   }
 
   @Override
   public void delete(PatientMysql person) {
-    data.remove(person.getId());
+    patientMysqlRepository.delete(person.getId());
   }
 
 

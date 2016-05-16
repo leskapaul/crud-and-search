@@ -21,8 +21,8 @@ public class PatientElasticsearchDao implements IPersonDao<IPerson, String>,
 
   private static final Logger LOG = Logger.getLogger(PatientElasticsearchDao.class.getName());
 
-  @Autowired PatientSearchRepository patientSearchRepository;
-  @Autowired ElasticsearchTemplate elasticsearchTemplate;
+  @Autowired private PatientSearchRepository patientSearchRepository;
+  @Autowired private ElasticsearchTemplate elasticsearchTemplate;
 
   @Override
   public PatientElasticsearch getById(String s) {
