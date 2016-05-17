@@ -31,8 +31,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Configuration
-@EnableElasticsearchRepositories
-@EnableJpaRepositories
+@EnableElasticsearchRepositories("org.ppollack.crudandsearch.pathology.elasticsearch")
+@EnableJpaRepositories("org.ppollack.crudandsearch.pathology.mysql")
 @EnableMongoRepositories("org.ppollack.crudandsearch.pathology.mongodb")
 public class ApplicationConfiguration {
 
