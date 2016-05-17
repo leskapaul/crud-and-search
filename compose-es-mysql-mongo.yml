@@ -1,9 +1,10 @@
 version: '2'
 
 # prerequisites
-# - ./data/mysql/db initialized by running compose-mysql.yml and then ./data/ddl/sample-ddl.sql into it
+# - ./data/mysql/db initialized by running compose-mysql.yml and then ./data/mysql/ddl/sample-ddl.sql into it
+# - ./data/mongo/db initialized by running compose-mongo.yml and then ./data/mongo/ddl/sample-ddl.sql into it
 
-# example usage: docker-compose -f compose-es-mysql.yml up
+# example usage: docker-compose -f compose-es-mysql-mongo.yml up
 
 services:
 
@@ -19,8 +20,19 @@ services:
         aliases:
           - crud-and-search
     environment:
-      #MYSQL_ROOT_PASSWORD: agillaire
       MYSQL_DATABASE: agillaire
+
+  crud-and-search-mongodb:
+    image: mongo
+    container_name: crud-and-search-mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/mongo/db:/data/db/
+    networks:
+      localbridge:
+        aliases:
+          - crud-and-search
 
   crud-and-search-elasticsearch:
       image: elasticsearch

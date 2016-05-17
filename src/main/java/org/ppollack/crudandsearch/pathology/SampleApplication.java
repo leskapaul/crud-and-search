@@ -7,8 +7,6 @@ import org.ppollack.crudandsearch.pathology.common.model.MailingAddress;
 import org.ppollack.crudandsearch.pathology.common.model.MailingAddressType;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodb;
 import org.ppollack.crudandsearch.pathology.mysql.PatientMysql;
-import org.ppollack.crudandsearch.pathology.mysql.PatientMysqlRepository;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.domain.Page;
 
@@ -60,7 +58,7 @@ public class SampleApplication {
   }
 
 
-  private static IPerson buildMongoDbPatient() {
+  private static PatientMongodb buildMongoDbPatient() {
     PatientMongodb patient = new PatientMongodb();
     patient.setId("foo");
     patient.setFirstName("Paul");
@@ -78,7 +76,7 @@ public class SampleApplication {
     return patient;
   }
 
-  private static IPerson buildMysqlPatient() {
+  private static PatientMysql buildMysqlPatient() {
     PatientMysql patient = new PatientMysql();
     patient.setId(1L);
     patient.setFirstName("Medhat");

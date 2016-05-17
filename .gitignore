@@ -2,3 +2,4 @@
 *.iml
 target
 data/mysql/db
+data/mongo/db

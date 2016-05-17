@@ -2,7 +2,6 @@ package org.ppollack.crudandsearch.pathology.common.dao;
 
 import org.ppollack.crudandsearch.dao.BasicCrudAndSearchDao;
 import org.ppollack.crudandsearch.dao.ICrudDao;
-import org.ppollack.crudandsearch.dao.ICrudDaoResolver;
 import org.ppollack.crudandsearch.pathology.common.model.IPerson;
 import org.ppollack.crudandsearch.pathology.elasticsearch.PatientElasticsearchDao;
 import org.ppollack.crudandsearch.pathology.mongodb.PatientMongodbDao;
@@ -29,7 +28,7 @@ public class PatientDao extends BasicCrudAndSearchDao<IPerson> {
       case "PATIENT_MYSQL":
         return patientMysqlDao;
       default:
-        return null;
+        throw new IllegalArgumentException("no DAO known by name " + name);
     }
   }
 }

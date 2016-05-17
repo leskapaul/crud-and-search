@@ -1,28 +1,26 @@
 package org.ppollack.crudandsearch.pathology.mongodb;
 
 import org.ppollack.crudandsearch.pathology.common.dao.IPersonDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class PatientMongodbDao implements IPersonDao<PatientMongodb, String> {
 
-  private Map<String, PatientMongodb> data = new HashMap<>();
+  @Autowired PatientMongodbRepository patientMongodbRepository;
 
   @Override
   public PatientMongodb getById(String id) {
-    return data.get(id);
+    return patientMongodbRepository.findOne(id);
   }
 
   @Override
   public void upsert(PatientMongodb person) {
-    data.put(person.getId(), person);
+    patientMongodbRepository.save(person);
   }
 
   @Override
   public void delete(PatientMongodb person) {
-    data.remove(person.getId());
+    patientMongodbRepository.delete(person);
   }
 }
