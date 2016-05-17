@@ -12,12 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class PatientDao extends BasicCrudAndSearchDao<IPerson> {
 
-  @Autowired PatientMysqlDao patientMysqlDao;
-  @Autowired PatientMongodbDao patientMongodbDao;
+  private PatientMysqlDao patientMysqlDao;
+  private PatientMongodbDao patientMongodbDao;
 
   @Autowired
-  public PatientDao(PatientElasticsearchDao searchDao) {
+  public PatientDao(PatientElasticsearchDao searchDao, PatientMysqlDao patientMysqlDao,
+      PatientMongodbDao patientMongodbDao) {
     super(searchDao);
+    this.patientMysqlDao = patientMysqlDao;
+    this.patientMongodbDao = patientMongodbDao;
   }
 
   @Override
@@ -28,7 +31,7 @@ public class PatientDao extends BasicCrudAndSearchDao<IPerson> {
       case "PATIENT_MYSQL":
         return patientMysqlDao;
       default:
-        throw new IllegalArgumentException("no DAO known by name " + name);
+        throw new IllegalArgumentException("no data access object known by name " + name);
     }
   }
 }

@@ -3,6 +3,10 @@ package org.ppollack.crudandsearch.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This checked exception offers a map of itemized issues, intended to facilitate catch blocks
+ * that wish to take action on specific issues (e.g. display field-specific messages to users).
+ */
 public class CrudException extends Exception {
 
   private Map<String, String> itemizedIssues;

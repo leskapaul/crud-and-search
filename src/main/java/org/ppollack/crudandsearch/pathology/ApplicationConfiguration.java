@@ -73,7 +73,6 @@ public class ApplicationConfiguration {
 
   @Bean
   public MongoTemplate mongoTemplate() throws Exception {
-    //remove _class field
     MappingMongoConverter converter =
         new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory()),
             new MongoMappingContext());
@@ -98,6 +97,7 @@ public class ApplicationConfiguration {
     patientMysqlRepository.deleteAll();
     patientSearchRepository.deleteAll();
     refreshPatientIndex();
+    LOG.info("PostConstruct: deleted all records in all data stores");
   }
 
   public void refreshPatientIndex() {

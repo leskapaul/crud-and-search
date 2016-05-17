@@ -29,6 +29,8 @@ public class SampleApplication {
     PatientDao patientDao = context.getBean(PatientDao.class);
     ApplicationConfiguration appConfig = context.getBean(ApplicationConfiguration.class);
 
+    LOG.info(SampleApplication.class.getCanonicalName() + " starting...\n");
+
     // upsert a patient into each disparate database
     patientDao.upsert(buildMysqlPatient());
     patientDao.upsert(buildMongoDbPatient());

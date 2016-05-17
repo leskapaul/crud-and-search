@@ -16,7 +16,7 @@ import org.springframework.data.domain.Page;
 @Ignore // this test was broken when mock implementations were replaced with real implementations
 public class PatientDaoTest {
 
-  private PatientDao dao = new PatientDao(buildSearchDao());
+  private PatientDao dao = null; // TODO fix this new PatientDao(buildSearchDao());
 
   private PatientElasticsearchDao buildSearchDao() {
     // TODO need to fix this now that mock impl was replaced by real impl
