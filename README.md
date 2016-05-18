@@ -20,8 +20,13 @@ Please see SampleApplication.java for an executable example.
 
 Docker is required, so please download before starting.
 
-First, start mySQL, MongoDB, and Elasticsearch, via Docker by running: docker-compose -f compose-es-mysql-mongo.yml up
+First, start mySQL, MongoDB, and Elasticsearch, via Docker by running: docker-compose -f compose-es-mysql-mongo.yml up.
 Output from each of the three data stores (mySQL, MongoDB, and Elasticsearch) will be displayed.
+```
+crud-and-search-mysql            | Version: '5.7.12'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+crud-and-search-mongodb          | 2016-05-18T03:46:40.840+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+crud-and-search-elasticsearch    | [2016-05-18 03:46:45,842][INFO ][cluster.routing.allocation] [Greer Grant] Cluster health status changed from [RED] to [GREEN] (reason: [shards started [[patient-index][0]] ...]).
+```
 
 Second, initialize mySQL by running data/mysql/ddl/sample-ddl.sql as shown below
 ```
