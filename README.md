@@ -18,19 +18,19 @@ Please see SampleApplication.java for an executable example.
 
 ## Sample Application
 
-1. startup mySQL, MongoDB, and Elasticsearch, via Docker
-Download Docker and then in the root of this project, run: docker-compose -f compose-es-mysql-mongo.yml up
+Docker is required, so please download before starting.
+
+First, start mySQL, MongoDB, and Elasticsearch, via Docker by running: docker-compose -f compose-es-mysql-mongo.yml up
 Output from each of the three data stores (mySQL, MongoDB, and Elasticsearch) will be displayed.
 
-2. initialize mySQL
-run data/mysql/ddl/sample-ddl.sql into mySQL as shown below
+Second, initialize mySQL by running data/mysql/ddl/sample-ddl.sql as shown below
 ```
 MacBook-Pro:crud-and-search paulpollack$ mysqlsh --uri root@localhost:3306 -D agillaire -p --sqlc < data/mysql/ddl/sample-ddl.sql
 Enter password:
 MacBook-Pro:crud-and-search paulpollack$
 ```
 
-3. run SampleApplication.java
+Lastly, run SampleApplication.java.
 This application will insert a patient record into mySQL, another one into MongoDB, and demonstrate
 searches against Elasticsearch that return one, the other, and both records.  Here's what the
 output of a successful run looks like:
