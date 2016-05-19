@@ -1,0 +1,6 @@
+FROM mysql
+
+ADD ./data/mysql/ddl/sample-ddl.sql /docker-entrypoint-initdb.d/sample-ddl.sql
+
+ENV MYSQL_ROOT_PASSWORD=agillaire
+ENV MYSQL_DATABASE=agillaire

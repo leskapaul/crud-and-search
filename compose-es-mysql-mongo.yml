@@ -1,34 +1,29 @@
 version: '2'
 
 # prerequisites
-# - 
+# -
 
 # example usage: docker-compose -f compose-es-mysql-mongo.yml up
 
 services:
 
   crud-and-search-mysql:
-    image: mysql
+    build:
+      context: .
+      dockerfile: dockerfile-mysql
     container_name: crud-and-search-mysql
     ports:
       - '3306:3306'
-    volumes:
-      - ./data/mysql/db:/var/lib/mysql
     networks:
       localbridge:
         aliases:
           - crud-and-search
-    environment:
-      MYSQL_ROOT_PASSWORD: agillaire
-      MYSQL_DATABASE: agillaire
 
   crud-and-search-mongodb:
     image: mongo
     container_name: crud-and-search-mongodb
     ports:
       - '27017:27017'
-    volumes:
-      - ./data/mongo/db:/data/db/
     networks:
       localbridge:
         aliases:

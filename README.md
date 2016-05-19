@@ -18,7 +18,7 @@ Please see SampleApplication.java for an executable example.
 
 ## Sample Application
 
-Docker is required, so please download before starting.
+Docker is required, so please download and install before starting.
 
 First, start mySQL, MongoDB, and Elasticsearch, via Docker by running: docker-compose -f compose-es-mysql-mongo.yml up.
 Output from each of the three data stores (mySQL, MongoDB, and Elasticsearch) will be displayed.
@@ -28,14 +28,7 @@ crud-and-search-mongodb          | 2016-05-18T03:46:40.840+0000 I NETWORK  [init
 crud-and-search-elasticsearch    | [2016-05-18 03:46:45,842][INFO ][cluster.routing.allocation] [Greer Grant] Cluster health status changed from [RED] to [GREEN] (reason: [shards started [[patient-index][0]] ...]).
 ```
 
-Second, initialize mySQL by running data/mysql/ddl/sample-ddl.sql as shown below
-```
-MacBook-Pro:crud-and-search paulpollack$ mysqlsh --uri root@localhost:3306 -D agillaire -p --sqlc < data/mysql/ddl/sample-ddl.sql
-Enter password:
-MacBook-Pro:crud-and-search paulpollack$
-```
-
-Lastly, run SampleApplication.java.
+Then, run SampleApplication.java.
 This application will insert a patient record into mySQL, another one into MongoDB, and demonstrate
 searches against Elasticsearch that return one, the other, and both records.  Here's what the
 output of a successful run looks like:
